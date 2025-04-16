@@ -1,9 +1,9 @@
 const mineflayer = require('mineflayer');
 
 const bot = mineflayer.createBot({
-  host: 'SEU_IP.aternos.me', // Substitua pelo IP do seu servidor Aternos
-  port: 25565,               // Porta padrão do Minecraft
-  username: 'Botzinho123',   // Nome do bot (não requer conta premium)
+  host: 'mapatest97.aternos.me', // Substitua pelo IP do seu servidor Aternos
+  port: 18180,               // Porta padrão do Minecraft
+  username: 'BatataBOT',   // Nome do bot (não requer conta premium)
 });
 
 const actions = ['forward', 'back', 'left', 'right', 'jump', 'sneak'];
