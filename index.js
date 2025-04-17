@@ -1,31 +1,30 @@
 const mineflayer = require('mineflayer');
 
 const bot = mineflayer.createBot({
-  host: 'mapatest97.aternos.me', // Substitua pelo IP do seu servidor Aternos
-  port: 18180,               // Porta padrão do Minecraft
-  username: 'BatataBOT',   // Nome do bot (não requer conta premium)
+  host: 'mapatest97.aternos.me', // substitua pelo IP do seu Aternos
+  port: 18180,                      // mantenha a porta padrão, a menos que seu Aternos use outra
+  username: 'BatataBOT'          // nick não premium
 });
 
 const actions = ['forward', 'back', 'left', 'right', 'jump', 'sneak'];
 
 bot.on('spawn', () => {
-  console.log('Bot entrou no servidor!');
-  iniciarMovimentosAleatorios();
+  console.log('✅ Bot entrou no servidor!');
+  startRandomMovement();
 });
 
-function iniciarMovimentosAleatorios() {
+function startRandomMovement() {
   setInterval(() => {
-    const acao = actions[Math.floor(Math.random() * actions.length)];
+    const action = actions[Math.floor(Math.random() * actions.length)];
+    bot.clearControlStates(); // Para qualquer ação anterior
 
-    pararTodosMovimentos();
-
-    switch (acao) {
+    switch (action) {
       case 'forward':
       case 'back':
       case 'left':
       case 'right':
-        bot.setControlState(acao, true);
-        setTimeout(() => bot.setControlState(acao, false), 1000);
+        bot.setControlState(action, true);
+        setTimeout(() => bot.setControlState(action, false), 1000);
         break;
       case 'jump':
         bot.setControlState('jump', true);
@@ -36,15 +35,13 @@ function iniciarMovimentosAleatorios() {
         setTimeout(() => bot.setControlState('sneak', false), 1000);
         break;
     }
+
+    console.log(`🎮 Ação: ${action}`);
   }, 4000); // Executa uma ação a cada 4 segundos
 }
 
-function pararTodosMovimentos() {
-  bot.clearControlStates();
-}
-
-bot.on('error', console.log);
+bot.on('error', err => console.log('❌ Erro:', err));
 bot.on('end', () => {
-  console.log('Bot desconectado, tentando reconectar...');
-  setTimeout(() => process.exit(1), 3000); // Railway reinicia o processo automaticamente
+  console.log('🔁 Bot desconectado. Encerrando para reinício.');
+  setTimeout(() => process.exit(1), 3000); // Railway reinicia automaticamente
 });
