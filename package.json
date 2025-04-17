@@ -1,7 +1,7 @@
 {
-  "name": "bot-minecraft",
+  "name": "mc-bot",
   "version": "1.0.0",
-  "description": "Bot Minecraft com movimentos aleatórios",
+  "description": "Bot do Minecraft usando mineflayer para manter Aternos online",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
